@@ -18,3 +18,15 @@ persistentVolume:
     enabled: true
     size: 10Gi
     storageClassName: "gp2"
+
+
+otel:
+  enabled: true
+
+  # Disable probes - OTEL collector is managed by OpAMP supervisor
+  # OpAMP dynamically configures the collector, so static health checks don't work
+  livenessProbe:
+    enabled: false
+
+  readinessProbe:
+    enabled: false
