@@ -8,8 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-org/your-kubeshark-repo.git # Your Git repo URL
-    path: kubeshark/overlays/production # Path to your Kustomize or Helm files
+    repoURL: https://helm.kubeshark.co
+    chart: kubeshark
+    targetRevision: 52.3.78  # Update to latest version
     # Or if using Helm chart directly:
     # chart: kubeshark
     # targetRevision: HEAD
@@ -18,8 +19,12 @@ spec:
     #     # Your Helm values here
   destination:
     name: in-cluster # Target cluster
-    namespace: kubeshark-ns # Namespace where Kubeshark will run
+    namespace: kubeshark # Namespace where Kubeshark will run
   syncPolicy:
     automated: {}
     syncOptions:
     - CreateNamespace=true
+
+
+
+
