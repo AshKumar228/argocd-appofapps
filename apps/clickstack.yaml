@@ -1,30 +1,22 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: clickstack
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: https://clickhouse.github.io/ClickStack-helm-charts
-    chart: clickstack
-    targetRevision: '1.0.1'
-    helm:
-      parameters:
-        - name: installCRDs
-          value: 'true'
-      valueFiles:
-          - $values/clickstack/values-clickstack.yaml
-    - repoURL: https://github.com/AshKumar228/argocd-appofapps.git  # Your Git repo
-      targetRevision: main  # or master, depending on your branch
-      ref: values
-  destination:
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: clickstack
+
+labels:
+  - pairs:
+      app.kubernetes.io/name: clickstack
+
+resources:
+
+
+# Helm chart configuration
+helmCharts:
+  - name: clickstack
+    repo: https://clickhouse.github.io/ClickStack-helm-charts
+    version: 1.1.0
+    releaseName: clickstack
     namespace: clickstack
-    name: in-cluster
-  syncPolicy:
-    automated: {}
-    syncOptions:
-      - CreateNamespace=true
+    valuesFile: values-clickstack.yaml
+    includeCRDs: false
       - ServerSideApply=true
