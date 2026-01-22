@@ -1,5 +1,5 @@
 global:
-  storageClassName: "gp2"
+  # storageClassName: "gp2"
   keepPVC: true # Preserve data when uninstalling
 
 clickhouse:
