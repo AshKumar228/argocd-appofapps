@@ -9,7 +9,7 @@ spec:
     namespace: argocd
   source:
     path: apps
-    repoURL: 'https://github.com/morey-tech/argo-cd-app-of-apps-demo'
+    repoURL: 'https://github.com/AshKumar228/argocd-appofapps'
     targetRevision: HEAD
   project: default
   # syncPolicy:
