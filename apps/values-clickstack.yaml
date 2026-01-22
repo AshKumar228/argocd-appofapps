@@ -1,1 +1,20 @@
+global:
+  storageClassName: "gp2"
+  keepPVC: true # Preserve data when uninstalling
 
+clickhouse:
+  enabled: true
+
+  # Persistent storage
+  persistentVolume:
+    enabled: true
+    size: 50Gi
+    storageClassName: "gp2"
+ 
+ 
+ 
+ # Persistent storage
+persistentVolume:
+    enabled: true
+    size: 10Gi
+    storageClassName: "gp2"
