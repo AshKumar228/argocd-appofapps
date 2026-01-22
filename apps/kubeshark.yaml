@@ -17,7 +17,7 @@ spec:
     #   values: |
     #     # Your Helm values here
   destination:
-    server: in-cluster # Target cluster
+    name: in-cluster # Target cluster
     namespace: kubeshark-ns # Namespace where Kubeshark will run
   syncPolicy:
     automated: {}
