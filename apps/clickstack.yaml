@@ -16,7 +16,10 @@ spec:
         - name: installCRDs
           value: 'true'
       valueFiles:
-        - values-clickstack.yaml
+          - $values/clickstack/values-clickstack.yaml
+    - repoURL: https://github.com/AshKumar228/argocd-appofapps.git  # Your Git repo
+      targetRevision: main  # or master, depending on your branch
+      ref: values
   destination:
     namespace: clickstack
     name: in-cluster
