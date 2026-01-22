@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubeshark
+  namespace: argocd # Or your Argo CD namespace
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io  
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/your-kubeshark-repo.git # Your Git repo URL
+    path: kubeshark/overlays/production # Path to your Kustomize or Helm files
+    # Or if using Helm chart directly:
+    # chart: kubeshark
+    # targetRevision: HEAD
+    # helm:
+    #   values: |
+    #     # Your Helm values here
+  destination:
+    server: in-cluster # Target cluster
+    namespace: kubeshark-ns # Namespace where Kubeshark will run
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
