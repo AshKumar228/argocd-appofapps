@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://artifacthub.io
+    repoURL: https://clickhouse.github.io/ClickStack-helm-charts
     chart: clickstack
     targetRevision: '1.0.1'
     helm:
