@@ -1,7 +1,10 @@
-apiVersion: v1
+apiVersion: argoproj.io/v1alpha1
 kind: Service
 metadata:
   name: loadbalancer-svc
+  namespace: clickstack
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   selector:
     app: clickstack
@@ -10,3 +13,12 @@ spec:
   - protocol: TCP
     port: 4813
     targetPort: 4813
+  destination:
+    namespace: clickstack
+    name: in-cluster
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+
