@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: 'https://github.com/AshKumar228/argocd-appofapps'
     targetRevision: HEAD
-    path: loadbalancer
+    path: apps/loadbalancer
   destination:
     server: https://kubernetes.default.svc
     namespace: clickstack
