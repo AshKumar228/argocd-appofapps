@@ -1,18 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loadbalancer-svc
+  name: loadbalancer
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    namespace: clickstack
-    server: https://kubernetes.default.svc
+  project: default
   source:
-    # ... source configuration
+    repoURL: 'https://github.com/AshKumar228/argocd-appofapps'
+    targetRevision: HEAD
+    path: manifests/loadbalancer
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: clickstack
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
-
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
