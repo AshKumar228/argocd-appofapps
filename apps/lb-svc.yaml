@@ -1,24 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Service
+kind: Application
 metadata:
   name: loadbalancer-svc
-  namespace: clickstack
+  namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  selector:
-    app: clickstack
-  type: LoadBalancer 
-  ports:
-  - protocol: TCP
-    port: 4813
-    targetPort: 4813
   destination:
     namespace: clickstack
-    name: in-cluster
+    server: https://kubernetes.default.svc
+  source:
+    # ... source configuration
   syncPolicy:
     automated: {}
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
 
