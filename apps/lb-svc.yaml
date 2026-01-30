@@ -12,7 +12,7 @@ spec:
     targetRevision: HEAD
     path: apps/loadbalancer
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: clickstack
   syncPolicy:
     automated:
